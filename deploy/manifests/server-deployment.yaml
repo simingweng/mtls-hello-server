@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: server
-          image: "io.simingweng/mtls-hello-server:latest"
+          image: "docker.pkg.github.com/simingweng/mtls-hello-server/mtls-hello-server:latest"
           imagePullPolicy: "IfNotPresent"
           ports:
             - containerPort: 8443
