@@ -1,0 +1,11 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: proxy-client
+spec:
+  secretName: proxy-client-tls
+  dnsNames:
+    - proxy
+  issuerRef:
+    name: self-signed-ca
+    kind: ClusterIssuer

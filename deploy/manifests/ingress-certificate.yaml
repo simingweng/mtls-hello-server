@@ -1,0 +1,11 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: ingress
+spec:
+  secretName: ingress-tls
+  dnsNames:
+    - localhost
+  issuerRef:
+    name: self-signed-ca
+    kind: ClusterIssuer

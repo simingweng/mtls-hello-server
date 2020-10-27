@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mtls-hello-server
+  labels:
+    app: sever
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: server
+  template:
+    metadata:
+      labels:
+        app: server
+    spec:
+      containers:
+        - name: server
+          image: "io.simingweng/mtls-hello-server:latest"
+          imagePullPolicy: "IfNotPresent"
+          ports:
+            - containerPort: 8443
+              name: https
+          volumeMounts:
+            - name: tls-secret
+              mountPath: "/etc/tls"
+      volumes:
+        - name: tls-secret
+          secret:
+            secretName: server-tls
