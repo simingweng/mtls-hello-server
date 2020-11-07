@@ -13,6 +13,8 @@ metadata:
     nginx.ingress.kubernetes.io/auth-tls-verify-depth: '1'
     nginx.ingress.kubernetes.io/auth-tls-verify-client: 'optional_no_ca'
     nginx.ingress.kubernetes.io/auth-tls-pass-certificate-to-upstream: 'true'
+    nginx.ingress.kubernetes.io/ssl-redirect: 'false'
+    cert-manager.io/cluster-issuer: 'self-signed-ca'
 spec:
   tls:
     - hosts:
