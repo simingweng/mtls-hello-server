@@ -6,6 +6,9 @@ metadata:
     app: server
 spec:
   ports:
+    - port: 80
+      name: http
+      targetPort: http
     - port: 443
       name: https
       targetPort: https

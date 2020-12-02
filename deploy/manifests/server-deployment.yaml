@@ -19,11 +19,17 @@ spec:
           image: "docker.pkg.github.com/simingweng/mtls-hello-server/mtls-hello-server:latest"
           imagePullPolicy: "IfNotPresent"
           ports:
+            - containerPort: 8080
+              name: http
             - containerPort: 8443
               name: https
           volumeMounts:
             - name: tls-secret
               mountPath: "/etc/tls"
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"             
       volumes:
         - name: tls-secret
           secret:
