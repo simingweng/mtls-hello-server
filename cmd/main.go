@@ -3,18 +3,23 @@ package main
 import (
 	"crypto/tls"
 	"crypto/x509"
-	"io"
 	"io/ioutil"
 	"log"
 	"net/http"
+	"net/http/httputil"
 	"sync"
 )
 
 func main() {
 	http.HandleFunc("/hello", func(writer http.ResponseWriter, request *http.Request) {
-		_, err := io.WriteString(writer, "hello world\n")
+		dump, err := httputil.DumpRequest(request, true)
 		if err != nil {
-			http.Error(writer, "failed to write response greeting", http.StatusInternalServerError)
+			http.Error(writer, "failed to dump request", http.StatusInternalServerError)
+			return
+		}
+		_, err = writer.Write(dump)
+		if err != nil {
+			http.Error(writer, "failed to write response", http.StatusInternalServerError)
 		}
 	})
 
